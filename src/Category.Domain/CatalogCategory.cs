@@ -14,6 +14,8 @@ namespace Category.Domain
         public CatalogCategory Parent { get; private set; } = null!;
 
         public ICollection<CatalogCategory> Children { get; private set; } = null!;
+
+        [NotMapped]
         public string? Path => GetPath(this);
         public static CatalogCategory Create(string category, int? parentId)
        => new CatalogCategory

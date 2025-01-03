@@ -1,3 +1,6 @@
+using Category.Infrastructure;
+using Microsoft.EntityFrameworkCore;
+
 namespace Category.Presentation
 {
     public class Program
@@ -5,6 +8,11 @@ namespace Category.Presentation
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+            builder.Services.AddDbContext<CatalogDbContext>(options =>
+             options.UseSqlServer(connectionString));
 
             // Add services to the container.
 
