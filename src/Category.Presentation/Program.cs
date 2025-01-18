@@ -1,3 +1,4 @@
+using Category.Domain.CommanInterfaces;
 using Category.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,15 +13,14 @@ namespace Category.Presentation
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
             builder.Services.AddDbContext<CatalogDbContext>(options =>
-             options.UseSqlServer(connectionString));
+                    options.UseSqlServer(connectionString));
 
-            // Add services to the container.
+            builder.Services.AddSingleton<UnitOfWork,EFUnitOfWork>();
 
             builder.Services.AddControllers();
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
 
             app.UseHttpsRedirection();
 
